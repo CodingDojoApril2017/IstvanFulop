@@ -1,0 +1,11 @@
+div {
+    height: 200px;
+    width: 350px;
+    background-color: red;
+    color: white;
+    font-size: 2rem;
+    text-align: center;
+}
+.win {
+    background-color: green;
+}
