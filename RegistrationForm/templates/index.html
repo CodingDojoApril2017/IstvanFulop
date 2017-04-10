@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Registration Page</title>
+    </head>
+    <body>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% if session["errors"] < 6 %}
+        <h3>Please register</h3>
+        <form action="/process" method="POST">
+            <label for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name">
+            <label for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+            <label for="bday">Date of birth:</label>
+            <input type="date" id="bday" name="bday">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password">
+            <label for="pw_confirm">Password Confirmation:</label>
+            <input type="password" for="pw_confirm" name="pw_confirm">
+            <input type="submit" value="Submit">
+        </form>
+        {% elif session["errors"] == 6%}
+        <div>
+            <h3>Thank you for registering</h3>
+            <p>Your information:</p>
+            <p>Name: {{session["first_name"]}} {{session["last_name"]}}</p>
+            <p>Email: {{session["email"]}}</p>
+            <p>Date of birth: {{session["bday"]}}</p>
+            <form action="/complete" method="POST">
+                <label for="pw_reconfirm">Enter your password to confirm:</label>
+                <input type="password" for="pw_reconfirm" name="pw_reconfirm">
+                <input type="submit" value="Confirm">
+            </form>
+        </div>
+        {% elif session["errors"] == 10%}
+        <h3>Enjoy your daily subscription to "Walrusses in Dresses"</h3>
+        <p>Thank you {{session["first_name"]}} for submitting your email.</p>
+        <p>We hope you enjoy your daily newsletter to Walrusses in Dresses.</p>
+        {% endif %}
+    </body>
+
+</html>
